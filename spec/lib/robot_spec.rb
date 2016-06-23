@@ -39,5 +39,27 @@ describe Robot do
       robot.f = "west"
       expect { robot.move }.to change { robot.x }.by(-1)
     end
+    
+    context "when robot is on the edge of the grid" do
+      it "should not be able to 'move' north when its y co-ordinate is at its max" do
+        robot.place(x: 2, y: 5, f: "north")
+        expect { robot.move }.to_not change { robot.y }
+      end
+      
+      it "should not be able to 'move' east when its x co-ordinate is at its max" do
+        robot.place(x: 5, y: 3, f: "east")
+        expect { robot.move }.to_not change { robot.x }
+      end
+      
+      it "should not be able to 'move' south when its y co-ordinate is at its min" do
+        robot.place(x: 3, y: 0, f: "south")
+        expect { robot.move }.to_not change { robot.y }
+      end
+      
+      it "should not be able to 'move' west when its x co-ordinate is at its min" do
+        robot.place(x: 0, y: 0, f: "west")
+        expect { robot.move }.to_not change { robot.x }
+      end
+    end
   end
 end
