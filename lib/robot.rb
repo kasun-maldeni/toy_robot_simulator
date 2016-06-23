@@ -1,15 +1,22 @@
 class Robot
-  attr_accessor :x, :y, :f
+  attr_accessor :x, :y, :f, :currently_placing, :successfully_placed
   
   FACING = ["north", "east", "south", "west"]
   X_RANGE = 0..5
   Y_RANGE = 0..5
+  
+  def initialize
+    self.currently_placing = false
+    self.successfully_placed = false
+  end
   
   def place(opts={})
     if valid_place_command? opts
     	self.x = opts[:x]
     	self.y = opts[:y]
     	self.f = opts[:f]
+    	self.successfully_placed = true
+    	self.currently_placing = false
     end
   end
   
